@@ -11,7 +11,9 @@ import {
 let currentTab     = 'productos';
 let editingProdId  = null;
 let editingMarcaId = null;
+let editingSpecsId = null;
 let marcasCache    = [];
+let productosCache = [];
 
 // ── Auth ──────────────────────────────────────────────────────────────────
 export function initAuth() {
