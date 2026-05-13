@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALFREDOStore — Panel Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       LOGIN SCREEN
+  ═════════════════════════════════════════════════════════════════════ -->
+  <div id="admin-login-screen">
+    <div class="login-card">
+      <p class="logo">ALFREDO<span>STORE</span></p>
+      <p class="subtitle">Panel Administrativo — Solo acceso autorizado</p>
+
+      <p class="login-error" id="login-error"></p>
+
+      <form id="login-form">
+        <label for="login-email">Correo electrónico</label>
+        <input type="email" id="login-email" placeholder="correo@ejemplo.com" required autocomplete="email" />
+
+        <label for="login-pass">Contraseña</label>
+        <input type="password" id="login-pass" placeholder="••••••••" required autocomplete="current-password" />
+
+        <button type="submit" class="btn-login-submit" id="login-btn">Ingresar</button>
+      </form>
+
+      <p style="margin-top:1.25rem;text-align:center;">
+        <a href="index.html" style="color:var(--muted);font-size:.78rem;text-decoration:none;">← Volver al catálogo</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════════════════════════════════
+       PANEL SCREEN
+  ═════════════════════════════════════════════════════════════════════ -->
+  <div id="admin-panel-screen">
+
+    <!-- Top bar -->
+    <div class="admin-topbar">
+      <p class="logo">ALFREDO<span>STORE</span> <span style="font-family:'DM Sans';font-weight:400;font-size:.8rem;color:var(--muted);">· Panel Admin</span></p>
+      <div class="admin-topbar-right">
+        <span id="admin-user-email"></span>
+        <a href="index.html">Ver catálogo →</a>
+        <button class="admin-btn admin-btn-ghost" id="logout-btn" style="font-size:.75rem;padding:.4rem .85rem;">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <div class="admin-body">
+
+      <!-- Tabs -->
+      <div class="admin-tabs">
+        <button class="admin-tab-btn active" data-tab="productos" id="tab-btn-productos">📦 Productos</button>
+        <button class="admin-tab-btn"         data-tab="marcas"    id="tab-btn-marcas">🏷️ Marcas</button>
+      </div>
+
+      <!-- ══ TAB: PRODUCTOS ══════════════════════════════════════════════ -->
+      <div id="tab-productos" class="admin-tab-panel">
+
+        <div class="admin-section-header">
+          <h2>Productos</h2>
+          <button class="admin-btn admin-btn-primary" id="new-prod-btn">+ Nuevo Producto</button>
+        </div>
+
+        <!-- Producto form -->
+        <div class="admin-form-wrap" id="prod-form-wrap">
+          <h3 id="prod-form-title">Nuevo Producto</h3>
+          <form id="prod-form">
+            <div class="admin-form-grid">
+
+              <div class="admin-form-group full">
+                <label for="prod-nombre">Nombre del producto *</label>
+                <input type="text" id="prod-nombre" placeholder="Ej: iPhone 17 Pro Max 256GB eSIM" required />
+              </div>
+
+              <div class="admin-form-group">
+                <label for="prod-marca">Marca *</label>
+                <select id="prod-marca" required>
+                  <option value="">-- Selecciona marca --</option>
+                </select>
+              </div>
+
+              <div class="admin-form-group">
+                <label for="prod-precio">Precio (Ej: $720,00 — dejar vacío = Consultar)</label>
+                <input type="text" id="prod-precio" placeholder="$720,00" />
+              </div>
+
+              <div class="admin-form-group">
+                <label for="prod-orden">Orden (número para ordenar)</label>
+                <input type="number" id="prod-orden" placeholder="1" min="0" />
+              </div>
+
+              <!-- Image: upload or URL -->
+              <div class="admin-form-group full">
+                <label>Imagen del producto</label>
+                <label style="color:var(--text);font-size:.8rem;margin-bottom:.3rem;">Subir desde mi PC:</label>
+                <input type="file" id="prod-img-file" accept="image/*" style="color:var(--text);font-size:.82rem;" />
+                <img id="prod-img-preview" src="" alt="Vista previa" />
+                <p class="img-or-divider">— o pegar un enlace (URL) de imagen —</p>
+                <input type="url" id="prod-img-url" placeholder="https://ejemplo.com/imagen.png" />
+              </div>
+
+            </div>
+            <div class="admin-form-actions">
+              <button type="submit" class="admin-btn admin-btn-primary" id="prod-save-btn">Guardar</button>
+              <button type="button" class="admin-btn admin-btn-ghost"  id="prod-cancel-btn">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Productos grid -->
+        <div id="productos-grid">
+          <div class="loading-wrap"><div class="spinner"></div></div>
+        </div>
+
+      </div><!-- /tab-productos -->
+
+      <!-- ══ TAB: MARCAS ════════════════════════════════════════════════ -->
+      <div id="tab-marcas" class="admin-tab-panel" style="display:none;">
+
+        <div class="admin-section-header">
+          <h2>Marcas / Categorías</h2>
+          <button class="admin-btn admin-btn-primary" id="new-marca-btn">+ Nueva Marca</button>
+        </div>
+
+        <!-- Marca form -->
+        <div class="admin-form-wrap" id="marca-form-wrap">
+          <h3 id="marca-form-title">Nueva Marca</h3>
+          <form id="marca-form">
+            <div class="admin-form-grid">
+              <div class="admin-form-group">
+                <label for="marca-nombre">Nombre de la marca *</label>
+                <input type="text" id="marca-nombre" placeholder="Ej: Samsung" required />
+              </div>
+              <div class="admin-form-group">
+                <label for="marca-subtitulo">Subtítulo (opcional)</label>
+                <input type="text" id="marca-subtitulo" placeholder="Ej: Galaxy A · S · Ultra Series" />
+              </div>
+              <div class="admin-form-group">
+                <label for="marca-orden">Orden</label>
+                <input type="number" id="marca-orden" placeholder="1" min="0" />
+              </div>
+            </div>
+            <div class="admin-form-actions">
+              <button type="submit" class="admin-btn admin-btn-primary" id="marca-save-btn">Guardar</button>
+              <button type="button" class="admin-btn admin-btn-ghost"  id="marca-cancel-btn">Cancelar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Marcas table -->
+        <div style="background:var(--card);border:1px solid var(--border);border-radius:1rem;overflow:hidden;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Subtítulo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="marcas-tbody">
+              <tr><td colspan="3" style="text-align:center;color:var(--muted);padding:2rem">Cargando...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div><!-- /tab-marcas -->
+
+    </div><!-- /admin-body -->
+  </div><!-- /admin-panel-screen -->
+
+  <!-- Toast -->
+  <div id="admin-toast"></div>
+
+  <!-- ── SCRIPTS ─────────────────────────────────────────────────────── -->
+  <script type="module">
+    import {
+      initAuth, handleLogin, handleLogout,
+      switchTab,
+      openProdForm, closeProdForm, saveProd,
+      openMarcaForm, closeMarcaForm, saveMarca,
+    } from './js/admin.js';
+
+    // Boot auth
+    initAuth();
+
+    // Login form
+    document.getElementById('login-form').addEventListener('submit', handleLogin);
+
+    // Logout
+    document.getElementById('logout-btn').addEventListener('click', handleLogout);
+
+    // Tabs
+    document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+
+    // ── Productos
+    document.getElementById('new-prod-btn').addEventListener('click', () => openProdForm());
+    document.getElementById('prod-cancel-btn').addEventListener('click', closeProdForm);
+    document.getElementById('prod-form').addEventListener('submit', saveProd);
+
+    // ── Marcas
+    document.getElementById('new-marca-btn').addEventListener('click', () => openMarcaForm());
+    document.getElementById('marca-cancel-btn').addEventListener('click', closeMarcaForm);
+    document.getElementById('marca-form').addEventListener('submit', saveMarca);
+  </script>
+
+</body>
+</html>

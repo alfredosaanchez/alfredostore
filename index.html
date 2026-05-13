@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catálogo oficial de smartphones, tablets, laptops y consolas. Encuentra los mejores precios en iPhone, Samsung, Xiaomi, Infinix, Tecno, Honor y más." />
+  <meta name="keywords" content="iPhone, Samsung, Xiaomi, Infinix, Tecno, Honor, ZTE, Vivo, laptops, tablets, consolas, precios, celulares" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="ALFREDOStore — Catálogo de Precios 2026" />
+  <meta property="og:description" content="Los mejores precios en smartphones, tablets, laptops y consolas." />
+  <meta property="og:type" content="website" />
+  <title>ALFREDOStore — Catálogo de Precios 2026</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+      <div>
+        <p class="logo">ALFREDO<span>STORE</span></p>
+        <p style="font-size:.7rem;color:var(--muted);margin-top:.1rem;">Catálogo Oficial · Precios 2026</p>
+      </div>
+      <div class="header-right">
+        <div class="header-contact">
+          <p>¿Consultas?</p>
+          <a href="tel:+584146834774">+58 414-683-4774</a>
+        </div>
+        <a href="admin.html" class="btn-admin" title="Panel Administrativo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+          </svg>
+          Admin
+        </a>
+      </div>
+    </div>
+    <!-- Category nav (populated by JS) -->
+    <nav class="cat-nav" aria-label="Categorías">
+      <div class="cat-nav-inner" id="cat-nav-inner"></div>
+    </nav>
+  </header>
+
+  <!-- ── HERO ────────────────────────────────────────────────────────── -->
+  <section class="hero fade-up" aria-label="Bienvenida">
+    <p class="hero-tag">Catálogo Completo</p>
+    <h2>Los Mejores Equipos<br/><span>Al Mejor Precio</span></h2>
+    <p>Smartphones, tablets, laptops y consolas. Precios actualizados. Disponibilidad sujeta a stock.</p>
+  </section>
+
+  <!-- ── CATALOG (populated by JS) ───────────────────────────────────── -->
+  <main id="catalog-main" style="max-width:1280px;margin:0 auto;padding:0 1.25rem 6rem;">
+    <div class="loading-wrap"><div class="spinner"></div></div>
+  </main>
+
+  <!-- ── FOOTER ──────────────────────────────────────────────────────── -->
+  <footer>
+    <p class="footer-logo">ALFREDO<span>STORE</span></p>
+    <p>© 2026 · Catálogo de precios · Sujeto a disponibilidad de stock</p>
+    <p style="margin-top:.3rem;">Los precios pueden variar sin previo aviso.</p>
+  </footer>
+
+  <!-- ── SPECS MODAL ─────────────────────────────────────────────────── -->
+  <div id="specs-modal" role="dialog" aria-modal="true" aria-labelledby="specs-modal-title">
+    <div id="specs-modal-box">
+      <button id="specs-modal-close" aria-label="Cerrar">&times;</button>
+      <img id="specs-modal-img" src="" alt="" />
+      <div id="specs-modal-body">
+        <div id="specs-modal-title"></div>
+        <div id="specs-modal-price"></div>
+        <ul id="specs-modal-list"></ul>
+        <a id="specs-modal-wa" href="#" target="_blank" rel="noopener" class="btn-whatsapp">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.116 1.522 5.847L.057 23.882l6.198-1.625A11.934 11.934 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.791 9.791 0 0 1-4.988-1.365l-.358-.213-3.68.965.981-3.594-.233-.369A9.79 9.79 0 0 1 2.182 12c0-5.415 4.403-9.818 9.818-9.818 5.414 0 9.818 4.403 9.818 9.818 0 5.414-4.404 9.818-9.818 9.818z"/>
+          </svg>
+          Comprar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SCRIPTS ─────────────────────────────────────────────────────── -->
+  <script type="module">
+    import { loadCatalog } from './js/catalog.js';
+    loadCatalog();
+  </script>
+
+</body>
+</html>
