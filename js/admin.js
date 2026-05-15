@@ -306,14 +306,14 @@ window._editSpecs = async (prodId, prodNombre) => {
   // Si está vacío, agrega filas de ejemplo
   if (specsRows.length === 0) {
     specsRows = [
-      ['📱','Pantalla',''],
-      ['⚙️','Procesador',''],
-      ['💾','RAM',''],
-      ['💾','Almacenamiento',''],
-      ['📷','Cámara principal',''],
-      ['📷','Cámara frontal',''],
-      ['🔋','Batería',''],
-      ['🔥','Sistema operativo',''],
+      { e: '📱', l: 'Pantalla', v: '' },
+      { e: '⚙️', l: 'Procesador', v: '' },
+      { e: '💾', l: 'RAM', v: '' },
+      { e: '💾', l: 'Almacenamiento', v: '' },
+      { e: '📷', l: 'Cámara principal', v: '' },
+      { e: '📷', l: 'Cámara frontal', v: '' },
+      { e: '🔋', l: 'Batería', v: '' },
+      { e: '🔥', l: 'Sistema operativo', v: '' },
     ];
   }
 
@@ -326,14 +326,14 @@ function renderSpecsRows() {
   container.innerHTML = specsRows.map((row, i) => `
     <div class="specs-row">
       <input class="specs-input specs-emoji" type="text"
-             placeholder="📱" value="${escHtml(row[0] || '')}" maxlength="4"
-             oninput="window._updateSpecRow(${i}, 0, this.value)" />
+             placeholder="📱" value="${escHtml(row.e || '')}" maxlength="4"
+             oninput="window._updateSpecRow(${i}, 'e', this.value)" />
       <input class="specs-input specs-label" type="text"
-             placeholder="Pantalla" value="${escHtml(row[1] || '')}"
-             oninput="window._updateSpecRow(${i}, 1, this.value)" />
+             placeholder="Pantalla" value="${escHtml(row.l || '')}"
+             oninput="window._updateSpecRow(${i}, 'l', this.value)" />
       <input class="specs-input specs-value" type="text"
-             placeholder='6.7&quot; AMOLED 120Hz' value="${escHtml(row[2] || '')}"
-             oninput="window._updateSpecRow(${i}, 2, this.value)" />
+             placeholder='6.7&quot; AMOLED 120Hz' value="${escHtml(row.v || '')}"
+             oninput="window._updateSpecRow(${i}, 'v', this.value)" />
       <button class="admin-btn admin-btn-sm admin-btn-del"
               onclick="window._removeSpecRow(${i})">🗑️</button>
     </div>`).join('');
@@ -343,11 +343,11 @@ function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 
-window._updateSpecRow = (i, col, val) => { if (specsRows[i]) specsRows[i][col] = val; };
+window._updateSpecRow = (i, key, val) => { if (specsRows[i]) specsRows[i][key] = val; };
 window._removeSpecRow = (i) => { specsRows.splice(i, 1); renderSpecsRows(); };
 
 export function addSpecRow() {
-  specsRows.push(['', '', '']);
+  specsRows.push({ e: '', l: '', v: '' });
   renderSpecsRows();
   const rows = document.querySelectorAll('.specs-row');
   if (rows.length) rows[rows.length - 1].querySelector('.specs-emoji').focus();
@@ -366,11 +366,11 @@ export async function saveSpecs() {
   document.querySelectorAll('.specs-row').forEach((row, i) => {
     const inputs = row.querySelectorAll('input');
     if (specsRows[i]) {
-      specsRows[i] = [inputs[0].value.trim(), inputs[1].value.trim(), inputs[2].value.trim()];
+      specsRows[i] = { e: inputs[0].value.trim(), l: inputs[1].value.trim(), v: inputs[2].value.trim() };
     }
   });
 
-  const items = specsRows.filter(r => r[1] || r[2]);
+  const items = specsRows.filter(r => r.l || r.v);
   const btn   = document.getElementById('specs-save-btn');
   btn.textContent = 'Guardando...'; btn.disabled = true;
 
