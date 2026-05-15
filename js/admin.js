@@ -300,8 +300,11 @@ window._editSpecs = async (prodId, prodNombre) => {
 
   try {
     const snap = await getDoc(doc(db, 'specs', prodId));
-    if (snap.exists()) specsRows = (snap.data().items || []).map(r => [...r]);
-  } catch {}
+    if (snap.exists()) {
+      const items = snap.data().items || [];
+      specsRows = items.map(r => Array.isArray(r) ? { e: r[0]||'', l: r[1]||'', v: r[2]||'' } : { e: r.e||'', l: r.l||'', v: r.v||'' });
+    }
+  } catch(err) { console.error(err); }
 
   // Si está vacío, agrega filas de ejemplo
   if (specsRows.length === 0) {

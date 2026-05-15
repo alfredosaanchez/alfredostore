@@ -150,7 +150,7 @@ function wireSpecsModal() {
     modalTitle.textContent = name;
     modalPrice.textContent = price || 'Consultar';
     modalList.innerHTML = specs.map(item => {
-      const emoji = item.e || ''; const label = item.l || ''; const val = item.v || '';
+      const emoji = Array.isArray(item) ? item[0]||'' : item.e||''; const label = Array.isArray(item) ? item[1]||'' : item.l||''; const val = Array.isArray(item) ? item[2]||'' : item.v||'';
       return `<li><span class="emoji">${emoji}</span><span><strong style="color:#e8e8f0">${label}:</strong> ${val}</span></li>`;
     }).join('');
     modalWA.href = wa;
